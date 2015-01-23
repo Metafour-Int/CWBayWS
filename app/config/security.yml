@@ -1,0 +1,14 @@
+security:
+    encoders:
+        AppBundle\Entity\User: plaintext
+    providers:
+        users:
+            entity: { class: AppBundle\Entity\User, property: email }
+    firewalls:
+        default:
+            http_digest:
+                key: "1"
+                realm: "cw"
+                provider: users
+    access_control:
+        - { path: ~, roles: ROLE_USER }
