@@ -9,7 +9,7 @@ Back-end for CWBay Android app
         * **php app/console doctrine:database:create**
         * **php app/console doctrine:schema:update --force**
     * Now go to phpMyAdmin and open the database 'CWBay' and run the following SQL:
-        * **insert into ``Users``(email, password,is_active) values('app', 'pass', 1);**
+        * **insert into Users(email, password,is_active) values('app', 'pass', 1);**
 * Now run the server using the following command:
     * **php app/console server:run 192.168.1.176:8000**  
 *Note: set your IP in the above command.*
