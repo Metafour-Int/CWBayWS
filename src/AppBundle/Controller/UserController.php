@@ -11,6 +11,7 @@ use AppBundle\Entity\User;
 class UserController extends Controller
 {
 	const DATE_FORMAT = 'Y-m-d';
+	const STATUS_EXISTS = 409;
 	
 	private function userExists($email) 
 	{
@@ -44,7 +45,7 @@ class UserController extends Controller
     	{
     		$response = new Response();
     		$response->setContent("Another user with email $email exists");
-    		$response->setStatusCode(409);
+    		$response->setStatusCode(self::STATUS_EXISTS);
     		return $response;
     	}
     	
@@ -104,7 +105,7 @@ class UserController extends Controller
     		{
     			$response = new Response();
     			$response->setContent("Another user with email $e exists");
-    			$response->setStatusCode(409);
+    			$response->setStatusCode(self::STATUS_EXISTS);
     			return $response;
     		}
     	}
