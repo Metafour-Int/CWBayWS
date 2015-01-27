@@ -1,0 +1,9 @@
+.settings
+.buildpath
+.project
+.gitignore~
+README.md~
+app/cache/*
+app/logs/*
+src/AppBundle/Entity/*.php~
+src/AppBundle/Controller/*.php~
