@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * AppBundle\Entity\User
@@ -43,11 +44,17 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
+     */
+    protected $ads;
+    
     public function __construct()
     {
         $this->isActive = true;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid(null, true));
+        $this->ads = new ArrayCollection();
     }
 
     /**
@@ -249,5 +256,38 @@ class User implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param \AppBundle\Entity\Ad $ads
+     * @return User
+     */
+    public function addAd(\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \AppBundle\Entity\Ad $ads
+     */
+    public function removeAd(\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }
