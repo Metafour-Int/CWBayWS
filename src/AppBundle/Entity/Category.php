@@ -41,9 +41,15 @@ class Category
      */
     protected $parent;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="category")
+     */
+    protected $ads;
+    
     public function __construct()
     {
     	$this->children = new ArrayCollection();
+    	$this->ads = new ArrayCollection();
     }
     
     /**
@@ -133,5 +139,38 @@ class Category
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param \AppBundle\Entity\Ad $ads
+     * @return Category
+     */
+    public function addAd(\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \AppBundle\Entity\Ad $ads
+     */
+    public function removeAd(\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }
